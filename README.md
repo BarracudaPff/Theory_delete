@@ -7,4 +7,4 @@
 #
 [Задача Джонсона с двумя станками](http://e-maxx.ru/algo/johnson_problem_2)
 #
-(Примеры на задачи Джонсона)[http://courses.washington.edu/ie337/Job%20Shop%20Scheduling.pdf]
+[Примеры на задачи Джонсона](http://courses.washington.edu/ie337/Job%20Shop%20Scheduling.pdf)
