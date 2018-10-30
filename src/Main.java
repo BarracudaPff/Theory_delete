@@ -1,12 +1,6 @@
-import javafx.util.Pair;
-import methods.Algorithm;
 import methods.Knapsack;
 import methods.OneMachine;
 import methods.TwoMachine;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 
 public class Main {
 
@@ -27,7 +21,10 @@ public class Main {
         main.doTwoMachine();
     }
 
-    public void doKnapsack() {
+    /**
+     * @see <a href="https://neerc.ifmo.ru/wiki/index.php?title=%D0%97%D0%B0%D0%B4%D0%B0%D1%87%D0%B0_%D0%BE_%D1%80%D1%8E%D0%BA%D0%B7%D0%B0%D0%BA%D0%B5">Задача о рюкзаке</a>
+     */
+    private void doKnapsack() {
         int[] weights = new int[]{1, 2, 4, 2, 1};
         int[] costs = new int[]{600, 5000, 1500, 40000, 500};
         int needed = 8;
@@ -42,7 +39,7 @@ public class Main {
      * @see <a href="http://koi.tspu.ru/koi_books/gorchakov/stanok.htm">One machine task</a>
      * @see <a href="http://e-maxx.ru/algo/johnson_problem_1">Задача Джонсона с одним станком</a>
      */
-    public void doOneMachine() {
+    private void doOneMachine() {
         int[] times = new int[]{5, 10, 5, 1, 3, 5};
         int[] priorities = new int[]{10, 6, 5, 4, 2, 8};
 
@@ -56,7 +53,7 @@ public class Main {
     /**
      * @see <a href="http://e-maxx.ru/algo/johnson_problem_2">Задача Джонсона с двумя станками</a>
      */
-    public void doTwoMachine() {
+    private void doTwoMachine() {
         int[] times = new int[]{4, 1, 5, 2, 5};
         int[] priorities = new int[]{3, 2, 4, 3, 6};
 

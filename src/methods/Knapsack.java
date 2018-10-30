@@ -31,7 +31,7 @@ public class Knapsack {
 
     @Override
     public String toString() {
-        if (results==null) {
+        if (results == null) {
             return "Calculate method first!";
         }
 
@@ -45,6 +45,10 @@ public class Knapsack {
             }
             builder.append(String.format("%-6d|\n", result[result.length - 1]));
         }
+        int[] f = results[results.length - 1];
+        builder.append("Answer:\n").append(f[f.length - 1]).append("\n");
+
+
         return builder.toString();
     }
 }
