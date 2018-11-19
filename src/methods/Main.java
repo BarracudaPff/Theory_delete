@@ -1,6 +1,4 @@
-import methods.Knapsack;
-import methods.OneMachine;
-import methods.TwoMachine;
+package methods;
 
 public class Main {
 
