@@ -26,7 +26,7 @@ public class Main {
                 new double[]{1.2667}
         };
 
-        testMNGS();
+        testMNPS();
         testZeidel();
     }
 
@@ -45,6 +45,18 @@ public class Main {
         MNGS mngs = new MNGS(A,B);
 
         double[][] results = mngs.solve(A, B);
+        System.out.println("A:");
+        System.out.println(Arrays.deepToString(A));
+        System.out.println("B:");
+        System.out.println(Arrays.deepToString(B));
+        System.out.println("X from Zeidel:");
+        System.out.println(Arrays.deepToString(results));
+    }
+
+    public static void testMNPS() {
+        MNPS mnps = new MNPS(A,B);
+
+        double[][] results = mnps.solve(A, B);
         System.out.println("A:");
         System.out.println(Arrays.deepToString(A));
         System.out.println("B:");

@@ -1,16 +1,21 @@
 package numerical.methods.ТолькоДляРыжих;
 
+import numerical.helpers.Matrix;
+
 import java.util.Arrays;
 
-public class MNGS {
-    private static final double EPS = 10e-1;
+import static numerical.helpers.Matrix.add;
+import static numerical.helpers.Matrix.mul;
+
+public class MNPS {
+    private static final double EPS = 10e-4;
     double[][] A;
     double[][] B;
     double[][] X;
 
     protected int iter;
 
-    public MNGS(double[][] a, double[][] b) {
+    public MNPS(double[][] a, double[][] b) {
         A = a;
         B = b;
     }
@@ -21,13 +26,14 @@ public class MNGS {
         double[][] XOld;
         System.out.println(Arrays.deepToString(q()));
 
+
         do {
             XOld = X.clone();
             System.out.println("f(X) is: " + f(X));
             nextPoint();
             iter++;
-            if (iter > B.length)
-                iter -= B.length;
+            if (iter >= A[0].length)
+                iter -= A[0].length;
         }
         while (Math.abs(f(X) - f(XOld)) > EPS);
 
@@ -39,7 +45,9 @@ public class MNGS {
     }
 
     private double[][] q() {
-        return add(mul(A, X), B);
+        double[][] values = new double[A[0].length][1];
+        values[iter][0] = 1;
+        return values;
     }
 
     private double f(double[][] X) {
