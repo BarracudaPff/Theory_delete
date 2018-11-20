@@ -26,6 +26,7 @@ public class Main {
                 new double[]{1.2667}
         };
 
+        testMNGS();
         testZeidel();
     }
 
@@ -38,5 +39,17 @@ public class Main {
         System.out.println(Arrays.deepToString(B));
         System.out.println("X from Zeidel:");
         System.out.println(Arrays.toString(results));
+    }
+
+    public static void testMNGS() {
+        MNGS mngs = new MNGS(A,B);
+
+        double[][] results = mngs.solve(A, B);
+        System.out.println("A:");
+        System.out.println(Arrays.deepToString(A));
+        System.out.println("B:");
+        System.out.println(Arrays.deepToString(B));
+        System.out.println("X from Zeidel:");
+        System.out.println(Arrays.deepToString(results));
     }
 }
