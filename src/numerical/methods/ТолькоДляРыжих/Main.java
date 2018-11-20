@@ -3,9 +3,12 @@ package numerical.methods.ТолькоДляРыжих;
 import numerical.helpers.Matrix;
 
 import java.util.Arrays;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
     private static double[][] A, B, X;
+    private static int MIN_RANDOM_VALUE = -100;
+    private static int MAX_RANDOM_VALUE = 100;
 
     public static void main(String[] args) {
         A = new double[][]{
@@ -26,8 +29,7 @@ public class Main {
                 new double[]{1.2667}
         };
 
-        testMNPS();
-        testZeidel();
+        System.out.println(Arrays.deepToString(randomMatrix(3)));
     }
 
     public static void testZeidel() {
@@ -42,7 +44,7 @@ public class Main {
     }
 
     public static void testMNGS() {
-        MNGS mngs = new MNGS(A,B);
+        MNGS mngs = new MNGS(A, B);
 
         double[][] results = mngs.solve(A, B);
         System.out.println("A:");
@@ -54,7 +56,7 @@ public class Main {
     }
 
     public static void testMNPS() {
-        MNPS mnps = new MNPS(A,B);
+        MNPS mnps = new MNPS(A, B);
 
         double[][] results = mnps.solve(A, B);
         System.out.println("A:");
@@ -63,5 +65,45 @@ public class Main {
         System.out.println(Arrays.deepToString(B));
         System.out.println("X from Zeidel:");
         System.out.println(Arrays.deepToString(results));
+    }
+
+    private static double[][] randomMatrix(int size) {
+        double[][] generate = new double[size][size];
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                generate[i][j] = ThreadLocalRandom.current().nextDouble(MIN_RANDOM_VALUE, MAX_RANDOM_VALUE);
+            }
+        }
+
+        return mul(generate, trans(generate));
+    }
+
+    private static double[][] mul(double[][] a, double[][] b) {
+        double[][] c = new double[a.length][b[0].length];
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < b[0].length; j++) {
+                c[i][j] = 0.00000;
+            }
+        }
+
+        for (int i = 0; i < a.length; i++) { // aRow
+            for (int j = 0; j < b[0].length; j++) { // bColumn
+                for (int k = 0; k < a[0].length; k++) { // aColumn
+                    c[i][j] += a[i][k] * b[k][j];
+                }
+            }
+        }
+
+        return c;
+    }
+
+    public static double[][] trans(double[][] a) {
+        double[][] temp = new double[a[0].length][a.length];
+
+        for (int i = 0; i < a.length; i++)
+            for (int j = 0; j < a[0].length; j++)
+                temp[j][i] = a[i][j];
+
+        return temp;
     }
 }

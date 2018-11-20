@@ -36,8 +36,8 @@ abstract public class QuickestDescent {
                 e.printStackTrace();
             }
             iter++;
-            if (iter > B.getRows())
-                iter -= B.getRows();
+            if (iter >= A.getCols())
+                iter -= A.getCols();
         }
         while (Math.abs(f(X) - f(XOld)) > EPS);
 

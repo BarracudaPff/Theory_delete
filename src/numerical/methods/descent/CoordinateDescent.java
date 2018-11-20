@@ -11,7 +11,7 @@ public class CoordinateDescent extends QuickestDescent {
 
     @Override
     protected Matrix q() {
-        double[][] values = new double[B.getRows()][1];
+        double[][] values = new double[A.getCols()][1];
         values[iter][0] = 1;
         return add(mul(A, Matrix.Generator.getFromValue(values)), B);
     }
