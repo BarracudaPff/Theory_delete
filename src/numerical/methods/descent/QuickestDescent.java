@@ -10,6 +10,8 @@ abstract public class QuickestDescent {
     Matrix B;
     Matrix X;
 
+    protected int iter;
+
     protected QuickestDescent(Matrix a, Matrix b) {
         A = a;
         B = b;
@@ -24,7 +26,18 @@ abstract public class QuickestDescent {
         do {
             XOld = X.clone();
             System.out.println("f(X) is: " + f(X));
+            System.out.println("q "+q());
+            System.out.println("nu "+nu());
             nextPoint();
+            System.out.println("Next "+X);
+            try {
+                Thread.sleep(600);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            iter++;
+            if (iter > B.getRows())
+                iter -= B.getRows();
         }
         while (Math.abs(f(X) - f(XOld)) > EPS);
 

@@ -1,6 +1,7 @@
 package numerical;
 
 import numerical.helpers.Matrix;
+import numerical.methods.Zeidel;
 import numerical.methods.descent.CoordinateDescent;
 import numerical.methods.Method;
 import numerical.methods.descent.GradientDescent;
@@ -8,11 +9,11 @@ import numerical.methods.descent.GradientDescent;
 import static numerical.helpers.Matrix.*;
 
 public class Main {
-    static int size = 2;
+    static int size = 4;
 
     public static void main(String[] args) {
 
-        test3();
+        test1();
 
     }
 
@@ -27,7 +28,13 @@ public class Main {
         });
 
         GradientDescent descent = new GradientDescent(A, B);
-        System.out.println(descent.solve());
+        //System.out.println(descent.solve());
+
+        System.out.println();
+        System.out.println();
+
+        CoordinateDescent coordinateDescent = new CoordinateDescent(A,B);
+        System.out.println(coordinateDescent.solve());
     }
 
     static void test2() {
@@ -41,6 +48,7 @@ public class Main {
                 new double[]{-0.1123},
                 new double[]{1.2667}});
         Matrix B = mul(A, X);
+        System.out.println("B"+B);
 
         System.out.println(A);
         System.out.println(B);
@@ -54,6 +62,6 @@ public class Main {
 
         System.out.println(A);
         System.out.println(B);
-        System.out.println(X);
+        System.out.println(new Zeidel.Builder().setA(A).setB(B).build().solve());
     }
 }
