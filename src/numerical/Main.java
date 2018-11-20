@@ -1,12 +1,9 @@
 package numerical;
 
 import numerical.helpers.Matrix;
-import numerical.methods.CoordinateDescent;
-import numerical.methods.Gauss;
+import numerical.methods.descent.CoordinateDescent;
 import numerical.methods.Method;
-import numerical.methods.Zeidel;
 import numerical.methods.descent.GradientDescent;
-import numerical.methods.descent.QuickestDescent;
 
 import static numerical.helpers.Matrix.*;
 
@@ -20,26 +17,17 @@ public class Main {
     }
 
     static void test3() {
-        //Matrix A = Matrix.Generator.getRandomSymmetric(4);
-        //Matrix X = Matrix.Generator.getRandom(4, 1);
-        //Matrix B = mul(A, X);
         Matrix A = Matrix.Generator.getFromValue(new double[][]{
                 new double[]{2, 1},
                 new double[]{1, 2}
-        });
-        Matrix X = Matrix.Generator.getFromValue(new double[][]{
-                new double[]{1},
-                new double[]{0},
         });
         Matrix B = Matrix.Generator.getFromValue(new double[][]{
                 new double[]{-2},
                 new double[]{1},
         });
 
-        GradientDescent descent = new GradientDescent(A, B, X);
-        System.out.println(descent.q());
-        System.out.println(descent.f(X));
-        System.out.println();
+        GradientDescent descent = new GradientDescent(A, B);
+        System.out.println(descent.solve());
     }
 
     static void test2() {
@@ -57,13 +45,6 @@ public class Main {
         System.out.println(A);
         System.out.println(B);
         System.out.println(X);
-
-        Method coord = new CoordinateDescent.Builder()
-                .setA(A)
-                .setB(B)
-                .build();
-        Matrix XXXNew = coord.solve();
-        System.out.println(XXXNew);
     }
 
     static void test1() {
@@ -74,14 +55,5 @@ public class Main {
         System.out.println(A);
         System.out.println(B);
         System.out.println(X);
-
-        Method coord = new CoordinateDescent.Builder()
-                .setA(A)
-                .setB(B)
-                .build();
-        Matrix XXXNew = coord.solve();
-        System.out.println(XXXNew);
-        System.out.println(Matrix.oneNorm(Matrix.minus(mul(A, XXXNew), B)));
-        System.out.println(Matrix.minus(mul(A, XXXNew), B));
     }
 }

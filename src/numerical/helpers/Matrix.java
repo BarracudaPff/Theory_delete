@@ -1,7 +1,5 @@
 package numerical.helpers;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Matrix {
@@ -80,6 +78,17 @@ public class Matrix {
         return Math.sqrt(sum);
     }
 
+    public static double twoNorm(Matrix m) {
+        double sum = 0;
+        for (int i = 0; i < m.getRows(); i++) {
+            for (int j = 0; j < m.getCols(); j++) {
+                sum += m.getValue(i, j) * m.getValue(i, j); // compute the column sum
+            }
+        }
+
+        return Math.sqrt(sum);
+    }
+
     public static Matrix mul(Matrix a, double v) {
         for (int i = 0; i < a.values.length; i++) {
             for (int j = 0; j < a.values[i].length; j++) {
@@ -99,11 +108,18 @@ public class Matrix {
         return new Matrix(temp);
     }
 
-    public static Matrix scalMul(Matrix a, Matrix b) {
-        if (!(a.getRows()==b.ge)) {
-            throw new IllegalArgumentException("A.Rows or B.Cols: " + a.getCols() + " did not match A.Rows or B.Cols" + b.getRows() + ".");
+    public static double scalMul(Matrix a, Matrix b) {
+        if (a.getRows() != 1 || b.getRows() != 1 || a.getCols() != b.getCols()) {
+            throw new IllegalArgumentException("A B Matrix with: " + a.getRows() + " and " + a.getCols()
+                    + " did not match (1,n) vector dimention.");
+        }
+        double value = 0;
+
+        for (int i = 0; i < a.getCols(); i++) {
+            value += a.getValue(0, i) * b.getValue(0, i);
         }
 
+        return value;
     }
 
     public double[] getRow(int p) {
@@ -153,7 +169,7 @@ public class Matrix {
 
     public static class Generator {
 
-        @NotNull
+
         public static Matrix getFromValue(double[][] values) {
             return new Matrix(values);
         }
@@ -167,7 +183,7 @@ public class Matrix {
             return new Matrix(values);
         }
 
-        @NotNull
+
         public static Matrix getRandom(int n, int m) {
             double[][] generate = new double[n][m];
             for (int i = 0; i < n; i++) {
@@ -178,12 +194,12 @@ public class Matrix {
             return new Matrix(generate);
         }
 
-        @NotNull
+
         public static Matrix getRandom() {
             return getRandom(ThreadLocalRandom.current().nextInt(MIN_RANDOM_SIZE, MAX_RANDOM_SIZE));
         }
 
-        @NotNull
+
         public static Matrix getRandom(int n) {
             return getRandom(n, n);
         }
