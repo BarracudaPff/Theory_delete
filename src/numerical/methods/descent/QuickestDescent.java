@@ -11,6 +11,7 @@ abstract public class QuickestDescent {
     Matrix X;
 
     protected int iter;
+    public int iCount;
 
     protected QuickestDescent(Matrix a, Matrix b) {
         A = a;
@@ -24,24 +25,23 @@ abstract public class QuickestDescent {
         Matrix XOld;
 
         do {
+            iCount++;
+            //System.out.println("\n\nITER "+iter);
             XOld = X.clone();
-            System.out.println("f(X) is: " + f(X));
-            System.out.println("q "+q());
-            System.out.println("nu "+nu());
+            //System.out.println("f(X) is: " + f(X)+" for X="+X);
+            //System.out.println("q "+q());
+            //System.out.println("nu "+nu());
             nextPoint();
-            System.out.println("Next "+X);
-            try {
-                Thread.sleep(600);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            //System.out.println("Next "+X+" PRf "+XOld);
             iter++;
-            if (iter >= A.getCols())
-                iter -= A.getCols();
+            //System.out.println(iter+" "+A.getRows());
+            if (iter >= A.getRows())
+                iter -= A.getRows();
         }
         while (Math.abs(f(X) - f(XOld)) > EPS);
 
-        return X;
+        //System.out.println("f(X) is: " + f(X)+" for X="+X);
+        return Matrix.mul(X,-1);
     }
 
     private void nextPoint() {

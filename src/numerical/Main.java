@@ -1,6 +1,7 @@
 package numerical;
 
 import numerical.helpers.Matrix;
+import numerical.methods.Gauss;
 import numerical.methods.Zeidel;
 import numerical.methods.descent.CoordinateDescent;
 import numerical.methods.Method;
@@ -13,8 +14,38 @@ public class Main {
 
     public static void main(String[] args) {
 
-        test1();
+        Matrix A = Matrix.Generator.getRandomSymmetric(size);
+        Matrix X = Matrix.Generator.getRandom(size, 1);
+        Matrix B = mul(A, X);
 
+        System.out.println("A: "+A);
+        System.out.println("X: "+X);
+        System.out.println("B: "+B);
+        System.out.println("\n###############################################################################\nXGauss");
+        Matrix XGaus = new Gauss.Builder().setA(A).setB(B).build().solve();
+        System.out.println(XGaus);
+        System.out.println(Matrix.mul(A,XGaus));
+
+        System.out.println("\n###############################################################################\nXZeidel");
+        Matrix XZeid = new Zeidel.Builder().setA(A).setB(B).build().solve();
+        System.out.println(XZeid);
+        System.out.println(Matrix.mul(A,XZeid));
+
+        System.out.println("\n###############################################################################\nXGRAD");
+        GradientDescent descentG = new GradientDescent(A,B);
+        Matrix XGrad = descentG.solve();
+        System.out.println("Iter is "+descentG.iCount);
+        System.out.println(XGrad);
+        System.out.println(Matrix.mul(A,XGrad));
+
+        System.out.println("\n###############################################################################\nXCOORD");
+        CoordinateDescent descentC = new CoordinateDescent(A,B);
+        Matrix XCoord = descentC.solve();
+        System.out.println("Iter is "+descentC.iCount);
+        System.out.println(XCoord);
+        System.out.println(Matrix.mul(A,XCoord));
+
+        //test3();
     }
 
     static void test3() {
@@ -26,9 +57,8 @@ public class Main {
                 new double[]{-2},
                 new double[]{1},
         });
-
-        GradientDescent descent = new GradientDescent(A, B);
-        //System.out.println(descent.solve());
+        System.out.println(A);
+        System.out.println(B);
 
         System.out.println();
         System.out.println();

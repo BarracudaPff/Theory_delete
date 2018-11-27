@@ -13,6 +13,8 @@ public class CoordinateDescent extends QuickestDescent {
     protected Matrix q() {
         double[][] values = new double[A.getCols()][1];
         values[iter][0] = 1;
-        return add(mul(A, Matrix.Generator.getFromValue(values)), B);
+        //System.out.println("q "+Generator.getFromValue(values));
+        return Generator.getFromValue(values);
+                //add(mul(A, Matrix.Generator.getFromValue(values)), B);
     }
 }
