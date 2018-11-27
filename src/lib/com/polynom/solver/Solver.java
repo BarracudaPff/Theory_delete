@@ -1,7 +1,4 @@
-
-
 package lib.com.polynom.solver;
-
 
 import lib.com.polynom.polynom.Polynom;
 import lib.com.polynom.shturm.Shturm;

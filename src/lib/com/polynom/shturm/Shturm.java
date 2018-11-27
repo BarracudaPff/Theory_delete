@@ -1,5 +1,3 @@
-
-
 package lib.com.polynom.shturm;
 
 import lib.com.polynom.polynom.Polynom;
