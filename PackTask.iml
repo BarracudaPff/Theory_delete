@@ -16,5 +16,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="MathParser.org-mXparser-v.4.2.0-jdk.1.8" level="project" />
+    <orderEntry type="library" name="symja-2012-04-08" level="project" />
   </component>
 </module>
