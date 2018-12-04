@@ -20,19 +20,21 @@ public class Zeidel implements Method {
         int size = A.getRows();
         double[] x = new double[size];
         double[] p = new double[size];
+        int ig = 0;
         do {
+            ig++;
             for (int i = 0; i < size; i++) {
                 double var = 0;
                 for (int j = 0; j < size; j++) {
                     if (j != i) {
-                        var += (A.getValue(i,j) * x[j]);
+                        var += (A.getValue(i, j) * x[j]);
                     }
                 }
                 p[i] = x[i];
-                x[i] = (B.getValue(i,0) - var) / A.getValue(i,i);
+                x[i] = (B.getValue(i, 0) - var) / A.getValue(i, i);
             }
         } while (!converge(x, p));
-
+        System.out.println("TER " + ig);
         return Matrix.Generator.getFromValueCol(x);
     }
 
@@ -46,7 +48,7 @@ public class Zeidel implements Method {
     }
 
     public static class Builder implements javafx.util.Builder<Zeidel> {
-        private  Matrix A, B;
+        private Matrix A, B;
 
         public Zeidel.Builder setA(Matrix a) {
             A = a;
@@ -60,7 +62,7 @@ public class Zeidel implements Method {
 
         @Override
         public Zeidel build() {
-            return new Zeidel(A,B);
+            return new Zeidel(A, B);
         }
     }
 }

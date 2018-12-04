@@ -6,8 +6,8 @@ public class Matrix {
     private static final int MAX_RANDOM_SIZE = 10;
     private static final int MIN_RANDOM_SIZE = 3;
 
-    public static final int MAX_RANDOM_VALUE = 100;
-    public static final int MIN_RANDOM_VALUE = -100;
+    public static final int MAX_RANDOM_VALUE = 10;
+    public static final int MIN_RANDOM_VALUE = -10;
 
     private static final String FORMAT = "%.2f\t";
 

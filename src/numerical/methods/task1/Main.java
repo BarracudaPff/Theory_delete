@@ -3,11 +3,16 @@ package numerical.methods.task1;
 import numerical.methods.task1.helpers.Matrix;
 import numerical.methods.task1.descent.CoordinateDescent;
 import numerical.methods.task1.descent.GradientDescent;
+import numerical.methods.task2.Hermite;
+
+import java.util.Random;
 
 import static numerical.methods.task1.helpers.Matrix.*;
+import static numerical.methods.task2.Hermite.getIter1;
+import static numerical.methods.task2.Hermite.getIter2;
 
 public class Main {
-    static int size = 4;
+    public static int size = 3;
 
     public static void main(String[] args) {
 
@@ -31,16 +36,16 @@ public class Main {
         System.out.println("\n###############################################################################\nXGRAD");
         GradientDescent descentG = new GradientDescent(A,B);
         Matrix XGrad = descentG.solve();
-        System.out.println("Iter is "+descentG.iCount);
-        System.out.println(XGrad);
-        System.out.println(Matrix.mul(A,XGrad));
+        System.out.println("Iter is "+getIter1());
+        System.out.println(XZeid);
+        System.out.println(Matrix.mul(A,XZeid));
 
         System.out.println("\n###############################################################################\nXCOORD");
         CoordinateDescent descentC = new CoordinateDescent(A,B);
         Matrix XCoord = descentC.solve();
-        System.out.println("Iter is "+descentC.iCount);
-        System.out.println(XCoord);
-        System.out.println(Matrix.mul(A,XCoord));
+        System.out.println("Iter is "+getIter2());
+        System.out.println(XZeid);
+        System.out.println(Matrix.mul(A,XZeid));
 
         //test3();
     }

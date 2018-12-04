@@ -2,6 +2,8 @@ package numerical.methods.task2;
 
 import lib.com.polynom.polynom.Polynom;
 
+import java.util.Random;
+
 public class Hermite {
 
     public static void main(String[] args) {
@@ -12,9 +14,9 @@ public class Hermite {
 
         // compute Hermite Polynoms
         for (int n = 2; n < N; n++) {
-            Polynom temp1 = H[1].multiply(H[n-1]);
-            Polynom temp2 = new Polynom(2 * (n-1), 0);   // 2(n-1)
-            Polynom temp3 = temp2.multiply(H[n-2]);
+            Polynom temp1 = H[1].multiply(H[n - 1]);
+            Polynom temp2 = new Polynom(2 * (n - 1), 0);   // 2(n-1)
+            Polynom temp3 = temp2.multiply(H[n - 2]);
             H[n] = temp1.subtract(temp3);
         }
 
@@ -22,4 +24,16 @@ public class Hermite {
         for (int n = 0; n < N; n++)
             System.out.println(H[n]);
     }
+
+    public static int getIter1() {
+        return new Random().nextInt(15) + 5;
+    }
+
+    public static int getIter2() {
+        return new Random().nextInt(20) + 10;
+    }
+    public static double g() {
+        return new Random().nextInt(20) + 10;
+    }
+
 }

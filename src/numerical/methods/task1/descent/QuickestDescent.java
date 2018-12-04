@@ -5,7 +5,7 @@ import numerical.methods.task1.helpers.Matrix;
 import static numerical.methods.task1.helpers.Matrix.*;
 
 abstract public class QuickestDescent {
-    private static final double EPS = 10e-4;
+    private static final double EPS = 10e-2;
     Matrix A;
     Matrix B;
     Matrix X;
