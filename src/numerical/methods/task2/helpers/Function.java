@@ -4,8 +4,14 @@ import static java.lang.Math.abs;
 
 public interface Function {
     double f(double x);
+
     double df(double x);
-    default double h(double x){
-        return abs(x)*f(x);
+
+    default double h(double x) {
+        return abs(x) * f(x);
+    }
+
+    default double dff(double x) {
+        return 0;
     }
 }

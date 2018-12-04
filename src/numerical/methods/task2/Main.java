@@ -8,17 +8,18 @@ import numerical.methods.task2.helpers.*;
 import java.util.Arrays;
 
 public class Main {
-    static int n = 4;
-    static double a = 4;
+    static int n = 3;
+    static double a = 5;
     static double st = -a;
     static double en = a;
 
     public static void main(String[] args) {
-        test2();
+        //test2();
 
         //Function function = new Function3Point().setX(new double[]{-2, 0, 2}).setY(new double[]{-0.4, -0.5, -0.4});
-        //InterpolLagr interpolLagr = new InterpolLagr(function, n, a);
-        //System.out.println(interpolLagr.com());
+        Function function = new Function10();
+        InterpolErm interpolLagr = new InterpolErm(function, a, n);
+        System.out.println(interpolLagr.com2());
     }
 
     private static void test2() {

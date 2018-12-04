@@ -14,4 +14,9 @@ public class Function10 implements Function {
     public double df(double x) {
         return 2 * (x + 2 * cos(x));
     }
+
+    @Override
+    public double dff(double x) {
+        return 2 - 4 * sin(x);
+    }
 }

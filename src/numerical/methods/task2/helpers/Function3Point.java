@@ -3,6 +3,7 @@ package numerical.methods.task2.helpers;
 public class Function3Point implements Function {
     public double[] x;
     public double[] y;
+    public double[] dy;
 
     public Function3Point setX(double[] x) {
         this.x = x.clone();
@@ -14,24 +15,28 @@ public class Function3Point implements Function {
         return this;
     }
 
+    public Function3Point setDy(double[] dy) {
+        this.dy = dy;
+        return this;
+    }
+
     @Override
     public double f(double v) {
         for (int i = 0; i < x.length; i++) {
-            if (v==x[i])
+            if (v == x[i])
                 return y[i];
         }
-        /*if (v == x[0])
-            return y[0];
-        else if (v == x[1])
-            return y[1];
-        else if (v == x[2])
-            return y[2];*/
-        System.err.println("ERROR");
+        System.err.println("ERROR f(x)");
         return 0;
     }
 
     @Override
-    public double df(double x) {
+    public double df(double v) {
+        for (int i = 0; i < x.length; i++) {
+            if (v == x[i])
+                return dy[i];
+        }
+        System.err.println("ERROR df(x)");
         return 0;
     }
 }

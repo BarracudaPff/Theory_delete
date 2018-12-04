@@ -18,6 +18,7 @@ public class InterpolErm {
     private Polynom interPol;
 
     private Polynom P_N_0;
+    private Polynom P_N_1;
     private Polynom P_N_2;
 
     public InterpolErm(Function func, double a, int n) {
@@ -70,9 +71,9 @@ public class InterpolErm {
                 .setY(comNewPoints());
         InterpolLagr interpolLagr2 = new InterpolLagr(ex2, n, a);
         interpolLagr2.setPoints(points);
-        P_N_2 = interpolLagr2.com();
+        P_N_1 = interpolLagr2.com();
 
-        Polynom q = omega(n+1).multiply(P_N_2);
+        Polynom q = omega(n + 1).multiply(P_N_1);
         interPol = P_N_0.add(q);
         return interPol;
     }
@@ -82,13 +83,16 @@ public class InterpolErm {
         interpolLagr.setPoints(points);
         P_N_0 = interpolLagr.com();
 
-        Function3Point ex2 = new Function3Point()
+        Function3Point ex1 = new Function3Point()
                 .setX(points)
-                .setY(comNewPoints());
-        InterpolLagr interpolLagr2 = new InterpolLagr(ex2, n, a);
-        interpolLagr2.setPoints(points);
-        P_N_2 = interpolLagr2.com();
+                .setY(comNewPoints())
+                .setDy(comNewPointsD());
+        InterpolErm interpolLagr1 = new InterpolErm(ex1, a, n);
+        interpolLagr1.setPoints(points);
+        P_N_1 = interpolLagr1.com();
 
+        Polynom q = omega(n + 1).multiply(P_N_1);
+        interPol = P_N_0.add(q);
         return interPol;
     }
 
@@ -100,12 +104,25 @@ public class InterpolErm {
         return res;
     }
 
+    private double[] comNewPointsD() {
+        double[] res = new double[n];
+        for (int i = 0; i < res.length; i++) {
+            res[i] = dP(points[i]);
+        }
+        return res;
+    }
+
     private double P(double x) {
         return (df(x) - P_N_0.differentiate().valueOf(x)) / (omega(n + 1).differentiate()).valueOf(x);
     }
 
     private double dP(double x) {
-        return 0;// (df(x) - P_N_0.differentiate().valueOf(x)) / omega(n + 1).differentiate().valueOf(x);
+        return (dff(x) - P_N_0.differentiate().differentiate().valueOf(x) - omega(n + 1).differentiate().differentiate().valueOf(x) * P(x))
+                / (2 * omega(n + 1).differentiate().valueOf(x));
+    }
+
+    private double dff(double x) {
+        return func.dff(x);
     }
 
     public Pair<Double, Double> maximumDeviation() {
