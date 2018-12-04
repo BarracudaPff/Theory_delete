@@ -3,23 +3,30 @@ package numerical.methods.task2;
 import javafx.util.Pair;
 import numerical.methods.task2.first.InterpolErm;
 import numerical.methods.task2.first.InterpolLagr;
-import numerical.methods.task2.helpers.Function10;
+import numerical.methods.task2.helpers.*;
+
+import java.util.Arrays;
 
 public class Main {
-    static int n = 3;
-    static double a = 6;
+    static int n = 4;
+    static double a = 4;
     static double st = -a;
     static double en = a;
 
     public static void main(String[] args) {
         test2();
+
+        //Function function = new Function3Point().setX(new double[]{-2, 0, 2}).setY(new double[]{-0.4, -0.5, -0.4});
+        //InterpolLagr interpolLagr = new InterpolLagr(function, n, a);
+        //System.out.println(interpolLagr.com());
     }
 
     private static void test2() {
-        Function10 function = new Function10();
-        InterpolErm interpolLagr = new InterpolErm(function, a);
-        interpolLagr.setPoints(new double[]{-3, 0, 3});
+        Function function = new Function10();
+        InterpolErm interpolLagr = new InterpolErm(function, a, n);
+        System.out.println(Arrays.toString(interpolLagr.getPoints()));
         System.out.println(interpolLagr.com());
+        System.out.println(getMaxPairStr(interpolLagr.maximumDeviation()));
     }
 
     private static void test1() {
@@ -44,5 +51,9 @@ public class Main {
         /*InterpolLagr interpolCh2 = new InterpolLagr(function2, n, a);
         interpolCh2.setPoints(new double[]{-5.5, -2.3, 2.3, 5.5});
         System.out.println(interpolCh2.comh());*/
+    }
+
+    private static String getMaxPairStr(Pair pair) {
+        return ("Max value is: " + pair.getKey() + "; Point is: " + pair.getValue());
     }
 }

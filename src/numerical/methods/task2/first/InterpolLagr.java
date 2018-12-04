@@ -4,6 +4,8 @@ import javafx.util.Pair;
 import lib.com.polynom.polynom.Polynom;
 import numerical.methods.task2.helpers.Function;
 
+import java.util.Arrays;
+
 import static java.lang.Math.abs;
 
 public class InterpolLagr {
