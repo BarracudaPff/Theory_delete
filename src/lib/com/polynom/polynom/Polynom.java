@@ -8,6 +8,8 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static java.lang.Math.abs;
+
 public class Polynom {
     private double[] coeffs;
 
@@ -333,7 +335,7 @@ public class Polynom {
 
         n[0] = c;
         for (int i = 1; i < n.length; i++) {
-            n[i] = o[i-1] / i;
+            n[i] = o[i - 1] / i;
         }
 
         return new Polynom(n);
@@ -384,13 +386,13 @@ public class Polynom {
         double a = this.getCoeffs()[m];
 
         if (x == Double.NEGATIVE_INFINITY) {
-            sign = (int) Math.round(Math.pow(-1, m) * a / Math.abs(a));
+            sign = (int) Math.round(Math.pow(-1, m) * a / abs(a));
 
         } else if (x == Double.POSITIVE_INFINITY) {
-            sign = (int) Math.round(a / Math.abs(a));
+            sign = (int) Math.round(a / abs(a));
 
         } else {
-            sign = (int) Math.round(this.valueOf(x) / Math.abs(this.valueOf(x)));
+            sign = (int) Math.round(this.valueOf(x) / abs(this.valueOf(x)));
 
         }
 
@@ -470,6 +472,16 @@ public class Polynom {
             return residues.get(i - 1);
     }
 
+    public Polynom round() {
+        for (int i = 0; i < coeffs.length; i++) {
+            if (abs(coeffs[i]) < 10e-14)
+                coeffs[i] = 0;
+        }
+
+        return this;
+    }
+
+    @Override
     public String toString() {
         String sPolynom = "";
 
@@ -483,7 +495,7 @@ public class Polynom {
                             sPolynom += "- ";
                         }
 
-                        sPolynom += Math.abs(coeffs[i]);
+                        sPolynom += abs(coeffs[i]);
                     } else if (coeffs.length == 1) {
                         sPolynom += coeffs[i];
                     }
@@ -499,14 +511,14 @@ public class Polynom {
                                 sPolynom += " + ";
                             }
 
-                            sPolynom += Math.abs(coeffs[i]);
+                            sPolynom += abs(coeffs[i]);
                         } else {
 
                             if (coeffs[i] < 0) {
                                 sPolynom += "- ";
                             }
 
-                            sPolynom += Math.abs(coeffs[i]);
+                            sPolynom += abs(coeffs[i]);
                         }
 
                         sPolynom += "·x";
@@ -522,14 +534,14 @@ public class Polynom {
                                 sPolynom += " + ";
                             }
 
-                            sPolynom += Math.abs(coeffs[i]);
+                            sPolynom += abs(coeffs[i]);
                         } else {
 
                             if (coeffs[i] < 0) {
                                 sPolynom += "- ";
                             }
 
-                            sPolynom += Math.abs(coeffs[i]);
+                            sPolynom += abs(coeffs[i]);
                         }
 
                         sPolynom += "·x^" + i;
